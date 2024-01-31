@@ -1,24 +1,9 @@
-Element.prototype.parents = function (selector) {
-  if (this.parentElement) {
-    if (this.parentElement.matches(selector)) {
-      return this.parentElement;
-    }
-    return this.parentElement.parents(selector);
-  }
-  return null;
-};
+/**********
+ * Swamp Originals Scripts
+ *********/
 
-const globalVariables = {
-  breakpoints: {
-    // these are min widths
-    desktopl: 1920,
-    desktop: 992,
-    tablet: 768,
-    mobile: {
-      landscape: 480,
-    },
-  },
-};
+import { gsap } from "gsap";
+import { globalVariables } from "./helpers";
 
 gsap.matchMedia().add(
   {

@@ -1,16 +1,8 @@
-import { parents } from "./helpers";
-
-const globalVariables = {
-  breakpoints: {
-    // these are min widths
-    desktopl: 1920,
-    desktop: 992,
-    tablet: 768,
-    mobile: {
-      landscape: 480,
-    },
-  },
-};
+/**********
+ * Swamp (About page)
+ *********/
+import { gsap } from "gsap";
+import { parents, globalVariables } from "./helpers";
 
 gsap.matchMedia().add(
   {

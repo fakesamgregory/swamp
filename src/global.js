@@ -2,7 +2,6 @@
  * Global Scripts:
  * These are run on every page
  *********/
-
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";

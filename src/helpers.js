@@ -22,3 +22,15 @@ export const parents = function (el, selector) {
   }
   return null;
 };
+
+export const globalVariables = {
+  breakpoints: {
+    // these are min widths
+    desktopl: 1920,
+    desktop: 992,
+    tablet: 768,
+    mobile: {
+      landscape: 480,
+    },
+  },
+};

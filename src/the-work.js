@@ -2,6 +2,8 @@
  * The Work Scripts:
  * These are run on the-work page
  *********/
+import { gsap } from "gsap";
+
 const filterEl = document.getElementById("easy-filter");
 const filters = Array.from(filterEl.querySelectorAll("[data-easy-filter]"));
 

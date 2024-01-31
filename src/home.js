@@ -2,18 +2,13 @@
  * Home Scripts:
  * These are run on home page
  *********/
+import { gsap } from "gsap";
+import { SplitText } from "gsap/SplitText";
+import { MorphSVGPlugin } from "gsap/all";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { globalVariables } from "./helpers";
 
-const globalVariables = {
-  breakpoints: {
-    // these are min widths
-    desktopl: 1920,
-    desktop: 992,
-    tablet: 768,
-    mobile: {
-      landscape: 480,
-    },
-  },
-};
+gsap.registerPlugin(SplitText, MorphSVGPlugin, ScrollTrigger);
 
 /*************
  * Hero
@@ -142,8 +137,6 @@ gsap
       });
     }
   });
-
-const homeEntertainLine = document.querySelector(".home-entertain-line");
 /****************
  * END: Entertain
  ****************/
@@ -157,11 +150,12 @@ const homeSwampOriginalsHeading = document.querySelector(
   ".home-swamp-originals-heading"
 );
 const swampOriginalsTimelineSplit = new SplitText(homeSwampOriginalsText, {
-  type: "words, lines",
+  type: "words,lines",
   linesClass: "overflow-hidden",
 });
-const swampOriginalsPill = document.querySelector(".swamp-originals-pill");
-const homeSwampOriginalsShows = document.querySelector(
+
+const swampOriginalsPill = homeSwampOriginals.querySelector(".button-pill");
+const homeSwampOriginalsShows = homeSwampOriginals.querySelector(
   ".home-swamp-originals-shows"
 );
 const swampOriginalsTimeline = gsap.timeline({
