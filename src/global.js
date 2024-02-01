@@ -71,6 +71,8 @@ if (services) {
   services.forEach((service) => {
     const serviceContent = service.querySelector(".services-heading");
 
+    console.log("this is a test");
+
     service.addEventListener("mousemove", function (e) {
       const windowWidth = window.innerWidth;
       const windowHeight = window.innerHeight;
