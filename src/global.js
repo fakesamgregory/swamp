@@ -66,10 +66,10 @@ if (intro) {
 /****************
  * Services
  ****************/
-const services = gsap.utils.toArray(".home-services-col");
+const services = gsap.utils.toArray(".services-col");
 if (services) {
   services.forEach((service) => {
-    const serviceContent = service.querySelector(".home-services-heading");
+    const serviceContent = service.querySelector(".services-heading");
 
     service.addEventListener("mousemove", function (e) {
       const windowWidth = window.innerWidth;
