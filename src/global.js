@@ -45,19 +45,22 @@ if (heroHeading) {
 /****************
  * Intro
  ****************/
-const intro = document.querySelector(".experience-page-intro");
+const intro = document.querySelector("[experience-page-intro-section]");
 if (intro) {
   const introListElements = intro.querySelectorAll("li");
 
-  gsap.from(introListElements, {
-    x: -50,
-    opacity: 0,
-    stagger: 0.05,
-    scrollTrigger: {
-      trigger: ".experience-page-info-heading",
-      start: "top center",
+  gsap.fromTo(
+    introListElements,
+    {
+      x: -50,
+      autoAlpha: 0,
     },
-  });
+    {
+      x: 0,
+      autoAlpha: 1,
+      stagger: 0.05,
+    }
+  );
 }
 /****************
  * END: Intro
@@ -67,7 +70,7 @@ if (intro) {
  * Services
  ****************/
 const services = gsap.utils.toArray(".services-col");
-if (services) {
+if (services.length) {
   services.forEach((service) => {
     const serviceContent = service.querySelector(".services-heading");
 
@@ -192,7 +195,7 @@ const stats = gsap.utils.toArray(
 if (stats.length) {
   stats.forEach((stat) => {
     const number = Array.from(
-      stat.querySelectorAll("[data-stat-animate-number]")
+      stat.querySelectorAll("[data-stat-animate-number]:not(.w-dyn-bind-empty)")
     );
 
     if (number.length) {

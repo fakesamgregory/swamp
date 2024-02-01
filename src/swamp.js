@@ -1,71 +1,146 @@
 /**********
- * Swamp (About page)
+ * Swamp Page Scripts:
+ * These are run on our-services page
  *********/
+import { globalVariables } from "./helpers";
 import { gsap } from "gsap";
-import { parents, globalVariables } from "./helpers";
+import { SplitText } from "gsap/SplitText";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.matchMedia().add(
-  {
-    isDesktop: `(min-width: ${globalVariables.breakpoints.tablet + 1}px)`,
-    isMobile: `(max-width: ${globalVariables.breakpoints.tablet}px)`,
+gsap.registerPlugin(SplitText, ScrollTrigger);
+
+const ourServicesIntroText = document.querySelector(".our-services-intro-text");
+const ourServicesIntroTextSplit = new SplitText(ourServicesIntroText, {
+  type: "lines, words",
+  linesClass: "overflow-hidden",
+});
+gsap.set(ourServicesIntroText, { autoAlpha: 1 });
+gsap.from(ourServicesIntroTextSplit.words, {
+  y: "100%",
+  stagger: 0.025,
+  scrollTrigger: {
+    trigger: ".our-services-intro-text",
+    start: "bottom bottom",
   },
-  (context) => {
-    let { isDesktop, isMobile, reduceMotion } = context.conditions;
+});
 
-    const caseStudyElement = document.querySelector(".case-study-list");
-    const caseStudies = gsap.utils.toArray(".case-study-item");
+gsap
+  .matchMedia()
+  .add(`(min-width: ${globalVariables.breakpoints.tablet}px)`, () => {
+    const ourServicesServices = gsap.utils.toArray(".about-services-service");
 
-    caseStudies.forEach((caseStudy, index) => {
-      if (!index) {
-        // start with first open
-        caseStudy.classList.add("open");
-        caseStudy.querySelector(".case-study-item-active-content").style.width =
-          "100%";
-      }
-      caseStudy
-        .querySelector(".case-study-book-spine")
-        .addEventListener("click", (e) => {
-          e.preventDefault();
+    gsap.fromTo(
+      ourServicesServices,
+      {
+        rotateY: -90,
+        x: 100,
+        autoAlpha: 0,
+      },
+      {
+        x: 0,
+        rotateY: 0,
+        autoAlpha: 1,
+        stagger: 0.075,
+        scrollTrigger: {
+          trigger: ".our-services-section",
+          start: "center bottom",
+        },
+        onComplete: () => {
+          // reset origin because it currently opens like a book
+          gsap.set(ourServicesServices, { transformOrigin: "center center" });
 
-          const isAlreadyOpen = parents(e.currentTarget, ".open");
+          ourServicesServices.forEach((service) => {
+            const cardWidth = service.offsetWidth;
+            const cardHeight = service.offsetHeight;
 
-          // prevent animation if first item is open and first item is clicked
-          if (caseStudies[0].classList.contains("open") && isAlreadyOpen) {
-            return;
-          }
+            const centerX = cardWidth / 2;
+            const centerY = cardHeight / 2;
 
-          const targetItem = isAlreadyOpen
-            ? caseStudies[0]
-            : parents(e.currentTarget, ".case-study-item");
+            service.addEventListener("mousemove", (e) => {
+              console.log(e);
+              const mouseX = e.offsetX - centerX;
+              const mouseY = e.offsetY - centerY;
 
-          const bookTimeline = gsap.timeline({
-            defaults: {
-              ease: "none",
-              duration: isDesktop ? 0.75 : 0.5,
-            },
-            onStart: function () {
-              caseStudyElement.querySelector(".open").classList.remove("open");
-              targetItem.classList.add("open");
-            },
+              const rotationY = (25 * mouseX) / (cardWidth / 2);
+              const rotationX = (25 * mouseY) / (cardHeight / 2);
+
+              gsap.to(service, {
+                rotationY,
+                rotationX,
+                zIndex: 2,
+              });
+            });
+
+            service.addEventListener("mouseout", () => {
+              gsap.to(service, {
+                rotationY: 0,
+                rotationX: 0,
+                zIndex: 1,
+              });
+            });
           });
+        },
+      }
+    );
 
-          bookTimeline.to(
-            targetItem.querySelector(".case-study-item-active-content"),
-            {
-              ...(isDesktop ? { width: "100%" } : { height: "auto" }),
-            }
-          );
-
-          bookTimeline.to(
-            caseStudyElement.querySelector(
-              ".open .case-study-item-active-content"
-            ),
-            {
-              ...(isDesktop ? { width: 0 } : { height: 0 }),
-            },
-            "<"
-          );
-        });
+    gsap.from(".our-services-section-heading", {
+      y: "100vh",
+      scrollTrigger: {
+        trigger: ".our-services-section",
+        scrub: true,
+        start: "top bottom",
+        end: "center center",
+      },
     });
-  }
+  });
+
+const servicesGallery = gsap.utils.selector("[data-services-gallery]");
+const galleryImages = servicesGallery("img");
+const viewMoreLink = servicesGallery("[data-services-gallery-view-more]")[0];
+const maxImages = 8;
+
+if (galleryImages.length > maxImages) {
+  galleryImages.forEach((image, index) => {
+    if (index > maxImages - 1) {
+      image.style.visibility = "hidden";
+      image.style.opacity = 0;
+      image.style.display = "none";
+      image.classList.add("hidden-image");
+    }
+  });
+
+  viewMoreLink.style.display = "block";
+
+  viewMoreLink.querySelector("a").addEventListener("click", () => {
+    const hiddenImages = servicesGallery(".hidden-image");
+
+    gsap.fromTo(
+      hiddenImages,
+      {
+        y: 50,
+        onComplete: function () {
+          viewMoreLink.style.display = "none";
+        },
+      },
+      {
+        y: 0,
+        autoAlpha: 1,
+        display: "block",
+        stagger: 0.05,
+      }
+    );
+  });
+}
+
+const ourServicesGallery = gsap.utils.toArray(
+  ".our-services-gallery-image:not(.hidden-image)"
 );
+gsap.from(ourServicesGallery, {
+  y: 50,
+  autoAlpha: 0,
+  stagger: 0.05,
+  scrollTrigger: {
+    trigger: ".our-services-gallery",
+    start: "top bottom-=25%",
+  },
+});

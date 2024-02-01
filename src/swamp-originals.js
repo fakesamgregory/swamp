@@ -3,7 +3,7 @@
  *********/
 
 import { gsap } from "gsap";
-import { globalVariables } from "./helpers";
+import { globalVariables, parents } from "./helpers";
 
 gsap.matchMedia().add(
   {
@@ -11,7 +11,7 @@ gsap.matchMedia().add(
     isMobile: `(max-width: ${globalVariables.breakpoints.tablet}px)`,
   },
   (context) => {
-    let { isDesktop, isMobile, reduceMotion } = context.conditions;
+    let { isDesktop, isMobile } = context.conditions;
 
     const caseStudyElement = document.querySelector(".case-study-list");
     const caseStudies = gsap.utils.toArray(".case-study-item");
@@ -28,7 +28,7 @@ gsap.matchMedia().add(
         .addEventListener("click", (e) => {
           e.preventDefault();
 
-          const isAlreadyOpen = e.currentTarget.parents(".open");
+          const isAlreadyOpen = parents(e.currentTarget, ".open");
 
           // prevent animation if first item is open and first item is clicked
           if (caseStudies[0].classList.contains("open") && isAlreadyOpen) {
@@ -37,7 +37,7 @@ gsap.matchMedia().add(
 
           const targetItem = isAlreadyOpen
             ? caseStudies[0]
-            : e.currentTarget.parents(".case-study-item");
+            : parents(e.currentTarget, ".case-study-item");
 
           const bookTimeline = gsap.timeline({
             defaults: {

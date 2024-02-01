@@ -13,12 +13,12 @@ export const numberFormat = function (
   return parts.join(dec_point);
 };
 
-export const parents = function (el, selector) {
+export const parents = (el, selector) => {
   if (el.parentElement) {
     if (el.parentElement.matches(selector)) {
       return el.parentElement;
     }
-    return el.parentElement.parents(selector);
+    return parents(el.parentElement, selector);
   }
   return null;
 };

@@ -1,4 +1,6 @@
-const videoSlide = document.querySelector("[data-video-slide]");
+const videoSlide = document.querySelector(
+  "[data-video-slide]:not(.w-condition-invisible)"
+);
 if (videoSlide) {
   const caseStudyImageSlide = document.querySelector(
     ".image-slider .image-slider-item"
