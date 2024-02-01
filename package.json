@@ -7,11 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack",
     "dev": "webpack --watch --progress && npm run serve",
-    "serve": "npx serve dist"
+    "serve": "npx serve dist",
+    "prepare": "husky"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "husky": "^9.0.7",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
   },
