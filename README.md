@@ -18,6 +18,8 @@ The code is automatically deployed when pushed to the main branch in Github.
 
 It is sent to Amazon S3 and accessed through the CDN Cloudfront `https://d1sx5up8n3wciq.cloudfront.net`.
 
+The dist folder is built on commit as a fallback to make sure dist has the latest code.
+
 ## Development
 
 To see this code on your development environment, download (Proxyman)[https://proxyman.io/]. My setting up an interception on the Cloudfront URL and map it Locally to these local files, you should see your development work.

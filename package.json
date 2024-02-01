@@ -7,8 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack",
     "dev": "webpack --watch --progress && npm run serve",
-    "serve": "npx serve dist",
-    "prepare": "husky"
+    "serve": "npx serve dist"
   },
   "author": "",
   "license": "ISC",

@@ -10,6 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1.2.0
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Compile build
+        run: npm start
+
       - uses: shallwefootball/s3-upload-action@master
         with:
           aws_key_id: ${{ secrets.AWS_KEY_ID }}
