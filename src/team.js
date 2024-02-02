@@ -39,7 +39,7 @@ let observer = new IntersectionObserver(
   { threshold: 0.5 }
 );
 
-const teamMembers = gsap.utils.toArray(".team-member");
+const teamMembers = gsap.utils.toArray("[data-team-member]");
 
 teamMembers.forEach((member) => {
   observer.observe(member);
