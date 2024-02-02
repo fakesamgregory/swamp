@@ -33,10 +33,12 @@ if (heroHeading) {
   );
 
   const heroAwards = document.querySelectorAll(".award-bar-inner .w-dyn-item");
-  gsap.to(heroAwards, {
-    autoAlpha: 1,
-    stagger: 0.025,
-  });
+  if (heroAwards.length) {
+    gsap.to(heroAwards, {
+      autoAlpha: 1,
+      stagger: 0.025,
+    });
+  }
 }
 /****************
  * END: Hero
