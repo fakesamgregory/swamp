@@ -33,14 +33,14 @@ heroTimeline.to(
 /****************
  * Blogs
  ****************/
-const blogs = document.querySelector(".blogs");
-const blogItems = blogs.querySelectorAll(".blogs-blog-item");
+const blogs = document.querySelector("[data-blogs]");
+const blogItems = blogs.querySelectorAll("[data-blog-item]");
 gsap.from(blogItems, {
   x: 100,
   autoAlpha: 0,
   stagger: 0.05,
   scrollTrigger: {
-    trigger: ".blogs",
+    trigger: blogs,
     start: "top bottom-=200",
   },
 });
