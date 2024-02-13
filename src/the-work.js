@@ -47,10 +47,12 @@ filters.forEach((filter) => {
 const caseStudies = gsap.utils.toArray("[data-case-study]");
 
 if (caseStudies.length > 11) {
-  caseStudies.forEach((caseStudy) => {
-    caseStudy.style.opacity = 0;
-    caseStudy.style.visibility = "hidden";
-    caseStudy.classList.add("hide-case-study");
+  caseStudies.forEach((caseStudy, index) => {
+    if (index > 11) {
+      caseStudy.style.opacity = 0;
+      caseStudy.style.visibility = "hidden";
+      caseStudy.classList.add("hide-case-study");
+    }
   });
 
   // show view more link
@@ -58,6 +60,7 @@ if (caseStudies.length > 11) {
 }
 
 const caseStudiesTimeline = gsap.timeline({});
+// console.log(caseStudies);
 caseStudiesTimeline.fromTo(
   caseStudies.filter(
     (caseStudy) => !caseStudy.classList.contains("hide-case-study")

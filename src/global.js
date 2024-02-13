@@ -45,30 +45,6 @@ if (heroHeading) {
  ****************/
 
 /****************
- * Intro
- ****************/
-const intro = document.querySelector("[experience-page-intro-section]");
-if (intro) {
-  const introListElements = intro.querySelectorAll("li");
-
-  gsap.fromTo(
-    introListElements,
-    {
-      x: -50,
-      autoAlpha: 0,
-    },
-    {
-      x: 0,
-      autoAlpha: 1,
-      stagger: 0.05,
-    }
-  );
-}
-/****************
- * END: Intro
- ****************/
-
-/****************
  * Services
  ****************/
 gsap
@@ -475,3 +451,22 @@ if (
 /****************
  * End: Quotes
  ****************/
+
+/****************
+ * Sub-Page Points
+ * Experience page intro
+ ****************/
+const introPoints = document.querySelector("[data-experience-page-intro]");
+
+if (introPoints) {
+  const introPointsList = introPoints.querySelectorAll("li");
+  gsap.from(introPointsList, {
+    x: -50,
+    autoAlpha: 0,
+    stagger: 0.05,
+    scrollTrigger: {
+      trigger: introPoints,
+      start: "center bottom",
+    },
+  });
+}
