@@ -5,10 +5,9 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-import { MorphSVGPlugin } from "gsap/all";
 import { numberFormat, globalVariables } from "./helpers";
 
-gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin, SplitText);
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 gsap.defaults({
   ease: "power2.out",
