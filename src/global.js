@@ -6,7 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { MorphSVGPlugin } from "gsap/all";
-import { numberFormat } from "./helpers";
+import { numberFormat, globalVariables } from "./helpers";
 
 gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin, SplitText);
 
@@ -71,32 +71,63 @@ if (intro) {
 /****************
  * Services
  ****************/
-const services = gsap.utils.toArray(".services-col");
-if (services.length) {
-  services.forEach((service) => {
-    const serviceContent = service.querySelector(".services-heading");
+gsap
+  .matchMedia()
+  .add(`(min-width: ${globalVariables.breakpoints.mobile.landscape}px)`, () => {
+    const services = gsap.utils.toArray("[data-services-perspective]");
+    if (services.length) {
+      services.forEach((service) => {
+        const serviceCol = Array.from(
+          service.querySelectorAll("[data-services-perspective-col]")
+        );
 
-    service.addEventListener("mousemove", function (e) {
-      const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight;
-      const x = e.clientX / windowWidth - 0.55;
-      const y = e.clientY / windowHeight - 0.55;
+        if (!serviceCol.length) {
+          console.warn('No "[data-services-perspective-col]" found: ', service);
+          return;
+        }
 
-      gsap.to(serviceContent, {
-        rotationY: x * 50,
-        rotationX: y * 50,
-        perspective: 1000,
+        serviceCol.forEach((col) => {
+          const serviceEl = col.querySelector("[data-services-perspective-el]");
+
+          if (!serviceEl) {
+            console.warn('No "[data-services-perspective-el]" found: ', col);
+            return;
+          }
+
+          console.log(serviceEl);
+
+          const cardWidth = col.offsetWidth;
+          const cardHeight = col.offsetHeight;
+
+          const centerX = cardWidth / 2;
+          const centerY = cardHeight / 2;
+
+          col.addEventListener("mousemove", function (e) {
+            console.log(e.target);
+            const mouseX = e.offsetX - centerX;
+            const mouseY = e.offsetY - centerY;
+
+            const rotationY = (5 * mouseX) / (cardWidth / 2);
+            const rotationX = (5 * mouseY) / (cardHeight / 2);
+
+            gsap.to(serviceEl, {
+              rotationY,
+              rotationX,
+              scale: 1.1,
+            });
+          });
+
+          col.addEventListener("mouseout", function (e) {
+            gsap.to(serviceEl, {
+              rotationY: 0,
+              rotationX: 0,
+              scale: 1,
+            });
+          });
+        });
       });
-    });
-
-    service.addEventListener("mouseout", function (e) {
-      gsap.to(serviceContent, {
-        rotationY: 0,
-        rotationX: 0,
-      });
-    });
+    }
   });
-}
 /****************
  * END: Services
  ****************/
@@ -281,6 +312,31 @@ if (forms.length) {
       if (submitButton.classList.contains("disabled")) {
         event.preventDefault();
       }
+    });
+  });
+}
+
+/****************
+ * Split Text Helper
+ ****************/
+const splitText = gsap.utils.toArray("[data-split-text]");
+if (splitText.length) {
+  splitText.forEach((el) => {
+    const split = new SplitText(el, {
+      type: "lines,words",
+      linesClass: "overflow-hidden",
+    });
+
+    gsap.from(split.words, {
+      autoAlpha: 0,
+      y: 50,
+      stagger: 0.1,
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: el,
+        start: "top bottom",
+      },
     });
   });
 }

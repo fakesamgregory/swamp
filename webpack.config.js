@@ -6,7 +6,7 @@ module.exports = {
     ["global"]: "./src/global.js",
     ["home"]: "./src/home.js",
     ["the-work"]: "./src/the-work.js",
-    ["swamp"]: "./src/swamp.js",
+    ["about"]: "./src/about.js",
     ["case-study-template"]: "./src/case-study-template.js",
     ["team"]: "./src/team.js",
     ["swamp-originals"]: "./src/swamp-originals.js",

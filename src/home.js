@@ -24,7 +24,7 @@ heroTimeline.from(headingSplitText.words, {
   rotate: 10,
 });
 
-const heroLogoBar = document.querySelector(".hero-logo-bar");
+const heroLogoBar = document.querySelector("[data-home-hero-bar]");
 const homeHeroAwards = heroLogoBar.querySelectorAll(".w-dyn-item");
 heroTimeline.to(
   heroLogoBar,
