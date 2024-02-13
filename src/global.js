@@ -94,8 +94,6 @@ gsap
             return;
           }
 
-          console.log(serviceEl);
-
           const cardWidth = col.offsetWidth;
           const cardHeight = col.offsetHeight;
 
@@ -103,7 +101,6 @@ gsap
           const centerY = cardHeight / 2;
 
           col.addEventListener("mousemove", function (e) {
-            console.log(e.target);
             const mouseX = e.offsetX - centerX;
             const mouseY = e.offsetY - centerY;
 
@@ -390,31 +387,33 @@ if (inputs.length) {
 /****************
  * Quotes
  ****************/
-const quotesSection = document.querySelector(".quotes-list");
+const quotesSection = document.querySelector("[data-quotes]");
 if (
   quotesSection &&
   !quotesSection.classList.contains("w-condition-invisible")
 ) {
-  gsap.from(quotesSection, {
+  // fade in on scroll
+  gsap.to(quotesSection, {
     scrollTrigger: {
-      trigger: ".quotes-list",
+      trigger: "[data-quotes]",
       start: "center bottom",
     },
-    autoAlpha: 0,
-    duration: 1,
+    autoAlpha: 1,
   });
 
-  const quoteItems = gsap.utils.toArray(".quote");
-  let quoteMaxHeight = 0;
-  let activeIndex = 0;
-  const quoteTimeInSeconds =
-    quotesSection.getAttribute("data-quote-slider-time") || 8;
+  const quotes = gsap.utils.toArray("[data-quote]");
 
-  const sliderTimeline = gsap.timeline({});
+  // if there are more than one quote, create slider
+  if (quotes.length > 1) {
+    let quoteMaxHeight = 0;
+    let activeIndex = 0;
+    const quoteTimeInSeconds =
+      quotesSection.getAttribute("data-quote-slider-time") || 8;
 
-  if (quoteItems.length > 1) {
-    quoteItems.forEach((quote, index) => {
-      // calculate the tallest quote
+    const sliderTimeline = gsap.timeline({});
+
+    // calculate the tallest quote
+    quotes.forEach((quote, index) => {
       quoteMaxHeight =
         quote.clientHeight > quoteMaxHeight
           ? quote.clientHeight
@@ -438,7 +437,7 @@ if (
     window.addEventListener("resize", () => {
       let quoteMaxHeight = 0;
 
-      quoteItems.forEach((quote, index) => {
+      quotes.forEach((quote) => {
         // calculate the tallest quote
         quoteMaxHeight =
           quote.clientHeight > quoteMaxHeight
@@ -450,10 +449,10 @@ if (
     });
 
     setInterval(() => {
-      const currentActiveSlide = quoteItems[activeIndex];
+      const currentActiveSlide = quotes[activeIndex];
       const nextActiveindex =
-        activeIndex + 1 === quoteItems.length - 1 ? 0 : activeIndex + 1;
-      const nextActiveSlide = quoteItems[nextActiveindex];
+        activeIndex + 1 === quotes.length ? 0 : activeIndex + 1;
+      const nextActiveSlide = quotes[nextActiveindex];
 
       sliderTimeline.to(currentActiveSlide, {
         autoAlpha: 0,
@@ -470,7 +469,7 @@ if (
       });
 
       activeIndex = nextActiveindex;
-    }, 8 * 1000);
+    }, quoteTimeInSeconds * 1000);
   }
 }
 /****************
