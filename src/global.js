@@ -170,6 +170,74 @@ if (stats.length) {
  ****************/
 
 /****************
+ * Case Studies
+ ****************/
+const caseStudies = document.querySelector("[data-case-studies]");
+if (caseStudies) {
+  const mouseCursor = document.getElementById("case-study-mouse");
+  const caseStudiesContent = caseStudies.querySelector(
+    "[data-case-studies-content]"
+  );
+  const caseStudy = gsap.utils.toArray("[data-case-study]");
+  const caseStudyPatterns = gsap.utils.toArray("[data-case-study-pattern]");
+
+  caseStudiesContent.addEventListener("mousemove", function (e) {
+    gsap.to(mouseCursor, {
+      duration: 0.5,
+      x: e.clientX - 75,
+      y: e.clientY - 75,
+      scale: 1,
+      autoAlpha: 1,
+      overwrite: true,
+    });
+  });
+
+  caseStudiesContent.addEventListener("mouseout", function (e) {
+    gsap.to(mouseCursor, {
+      duration: 0.2,
+      x: e.clientX - 75,
+      y: e.clientY - 75,
+      scale: 0.2,
+      autoAlpha: 0,
+      delay: 0.3,
+    });
+  });
+
+  const caseStudyTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: caseStudies,
+      start: "center bottom",
+    },
+  });
+
+  caseStudyTimeline.from(caseStudyPatterns[1], {
+    xPercent: 100,
+  });
+
+  caseStudyTimeline.from(
+    caseStudy,
+    {
+      xPercent: 100,
+      autoAlpha: 0,
+      stagger: 0.07,
+      ease: "power4.out",
+    },
+    "<25%"
+  );
+
+  caseStudyTimeline.from(
+    caseStudyPatterns[0],
+    {
+      xPercent: -100,
+    },
+    "<25%"
+  );
+}
+/****************
+ * END: Case Studies
+ ****************/
+
+/****************
  * All forms prevent if disabled
  ****************/
 const forms = Array.from(document.querySelectorAll("form"));
@@ -241,6 +309,7 @@ if (hashLinks.length) {
           behavior: "smooth",
         });
       }
+      e.target.blur();
     });
   });
 }
