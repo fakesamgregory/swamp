@@ -4,7 +4,7 @@
  *********/
 import { gsap } from "gsap";
 
-const maxNumberofVisibleElements = 11;
+const maxNumberofVisibleElements = 12;
 
 const filterEl = document.getElementById("easy-filter");
 const filters = Array.from(filterEl.querySelectorAll("[data-easy-filter]"));
