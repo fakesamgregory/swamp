@@ -81,26 +81,38 @@ const caseStudyInfoTimeline = gsap.timeline({
   },
 });
 
+caseStudyInfoTimeline.set(caseStudyInfoHeader, {
+  autoAlpha: 1,
+});
+
 caseStudyInfoTimeline.from(caseStudyInfoHeaderSplit.words, {
   autoAlpha: 0,
   y: 50,
   stagger: 0.1,
 });
 
-caseStudyInfoTimeline.from(
+caseStudyInfoTimeline.fromTo(
   caseStudyInfoBrief,
   {
     autoAlpha: 0,
     y: 50,
   },
+  {
+    autoAlpha: 1,
+    y: 0,
+  },
   "<25%"
 );
 
-caseStudyInfoTimeline.from(
+caseStudyInfoTimeline.fromTo(
   caseStudyInfoIdea,
   {
     autoAlpha: 0,
     y: 100,
+  },
+  {
+    autoAlpha: 1,
+    y: 0,
   },
   "<25%"
 );

@@ -4,9 +4,10 @@
  *********/
 import { gsap } from "gsap";
 
+const maxNumberofVisibleElements = 11;
+
 const filterEl = document.getElementById("easy-filter");
 const filters = Array.from(filterEl.querySelectorAll("[data-easy-filter]"));
-
 const filterItems = Array.from(
   filterEl.querySelectorAll("[data-easy-filter-item]")
 );
@@ -22,17 +23,19 @@ filters.forEach((filter) => {
     e.currentTarget.classList.add("filter-active");
 
     filterItems.forEach((item, index) => {
-      if (index > 10) {
+      if (index > maxNumberofVisibleElements - 1) {
         item.classList.add("hide-case-study");
         item.style.opacity = 0;
         item.style.visibility = "hidden";
+        item.setAttribute("hidden", true);
       } else {
-        if (category === "reset") {
+        if (
+          category === "reset" ||
+          item.getAttribute("data-easy-filter-item") === category
+        ) {
           item.style.display = "block";
-        } else if (item.getAttribute("data-easy-filter-item") !== category) {
-          item.style.display = "none";
         } else {
-          item.style.display = "block";
+          item.style.display = "none";
         }
       }
     });
@@ -48,10 +51,11 @@ const caseStudies = gsap.utils.toArray("[data-case-study]");
 
 if (caseStudies.length > 11) {
   caseStudies.forEach((caseStudy, index) => {
-    if (index > 11) {
+    if (index > maxNumberofVisibleElements - 1) {
       caseStudy.style.opacity = 0;
       caseStudy.style.visibility = "hidden";
       caseStudy.classList.add("hide-case-study");
+      caseStudy.setAttribute("hidden", true);
     }
   });
 
@@ -60,7 +64,6 @@ if (caseStudies.length > 11) {
 }
 
 const caseStudiesTimeline = gsap.timeline({});
-// console.log(caseStudies);
 caseStudiesTimeline.fromTo(
   caseStudies.filter(
     (caseStudy) => !caseStudy.classList.contains("hide-case-study")
@@ -77,6 +80,30 @@ caseStudiesTimeline.fromTo(
 
 filterEl.addEventListener("filter", function (e) {
   caseStudiesTimeline.restart();
+
+  const visibleElements = Array.from(
+    document.querySelectorAll("[data-easy-filter-item]")
+  ).filter((item) => item.style.display !== "none");
+
+  if (visibleElements.length > maxNumberofVisibleElements - 1) {
+    filterItems.forEach((caseStudy, index) => {
+      console.log(index, index - 1, maxNumberofVisibleElements - 1);
+      if (index > maxNumberofVisibleElements - 1) {
+        caseStudy.classList.add("hide-case-study");
+        caseStudy.style.opacity = 0;
+        caseStudy.style.visibility = "hidden";
+        caseStudy.setAttribute("hidden", true);
+      } else {
+        caseStudy.classList.remove("hide-case-study");
+        caseStudy.style.opacity = 1;
+        caseStudy.style.visibility = "visible";
+        caseStudy.removeAttribute("hidden");
+      }
+    });
+    document.querySelector("[data-view-more-link]").style.display = "block";
+  } else {
+    document.querySelector("[data-view-more-link]").style.display = "none";
+  }
 });
 
 document
@@ -86,6 +113,10 @@ document
 
     caseStudies.forEach((caseStudy) => {
       caseStudy.classList.remove("hide-case-study");
-      filterEl.dispatchEvent(filterEvent);
+      caseStudy.style.opacity = 1;
+      caseStudy.style.visibility = "visible";
+      caseStudy.removeAttribute("hidden");
     });
+
+    e.currentTarget.style.display = "none";
   });

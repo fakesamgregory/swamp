@@ -456,16 +456,22 @@ if (
  * Experience page intro
  ****************/
 const introPoints = document.querySelector("[data-experience-page-intro]");
-
 if (introPoints) {
   const introPointsList = introPoints.querySelectorAll("li");
-  gsap.from(introPointsList, {
-    x: -50,
-    autoAlpha: 0,
-    stagger: 0.05,
-    scrollTrigger: {
-      trigger: introPoints,
-      start: "center bottom",
+  gsap.fromTo(
+    introPointsList,
+    {
+      x: -50,
+      autoAlpha: 0,
     },
-  });
+    {
+      x: 0,
+      autoAlpha: 1,
+      stagger: 0.05,
+      scrollTrigger: {
+        trigger: introPoints,
+        start: "center bottom",
+      },
+    }
+  );
 }
