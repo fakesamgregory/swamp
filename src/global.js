@@ -338,6 +338,20 @@ if (inputs.length) {
     });
   });
 }
+
+const sendAnotherButton = document.querySelector("[data-send-another]");
+if (sendAnotherButton) {
+  sendAnotherButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const form = document.querySelector(".get-in-touch-form");
+    const successDialog = document.querySelector(".w-form-done");
+    successDialog.style.display = "none";
+    form.style.display = "grid";
+
+    form.reset();
+    form.querySelector("[type=submit]").classList.add("disabled");
+  });
+}
 /****************
  * END: All forms prevent if disabled
  ****************/
