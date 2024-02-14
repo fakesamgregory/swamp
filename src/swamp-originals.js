@@ -22,6 +22,9 @@ gsap.matchMedia().add(
         caseStudy.classList.add("open");
         caseStudy.querySelector(".case-study-item-active-content").style.width =
           "100%";
+        caseStudy.querySelector(
+          ".case-study-item-active-content"
+        ).style.height = "auto";
       }
       caseStudy
         .querySelector(".case-study-book-spine")
@@ -42,7 +45,7 @@ gsap.matchMedia().add(
           const bookTimeline = gsap.timeline({
             defaults: {
               ease: "none",
-              duration: isDesktop ? 0.75 : 0.5,
+              duration: isDesktop ? 0.75 : 0.3,
             },
             onStart: function () {
               caseStudyElement.querySelector(".open").classList.remove("open");
