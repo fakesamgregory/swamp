@@ -17,7 +17,7 @@ const filterEvent = new Event("filter");
 filters.forEach((filter) => {
   filter.addEventListener("click", (e) => {
     e.preventDefault();
-    const category = e.currentTarget.hash.substr(1);
+    const category = decodeURIComponent(e.currentTarget.hash.substr(1));
 
     filterEl.querySelector(".filter-active").classList.remove("filter-active");
     e.currentTarget.classList.add("filter-active");
