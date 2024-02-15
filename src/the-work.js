@@ -39,6 +39,8 @@ filters.forEach((filter) => {
         }
       }
     });
+    });
+  });
 
     
 
