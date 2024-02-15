@@ -34,11 +34,15 @@ const introTextSplit = new SplitText(introText, {
   type: "lines",
 });
 
-gsap.from(introTextSplit.lines, {
-  autoAlpha: 0,
-  stagger: 0.1,
-  scrollTrigger: {
-    trigger: introText,
-    start: "top bottom-=200",
-  },
+introTextSplit.lines.forEach((line, index) => {
+  gsap.from(line, {
+    autoAlpha: 0,
+    x: ["-100%", "100%"][index % 2],
+    ease: "power4.out",
+    scrollTrigger: {
+      trigger: introText,
+      start: "top bottom-=200",
+      end: "bottom top",
+    },
+  });
 });
