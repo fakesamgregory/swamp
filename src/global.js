@@ -443,13 +443,13 @@ if (
       activeIndex = nextActiveindex;
     };
 
-    const timeout = setInterval(rotateQuote, quoteTimeInSeconds * 1000);
+    let timeout = setInterval(rotateQuote, quoteTimeInSeconds * 1000);
 
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) {
         clearInterval(timeout);
       } else {
-        setInterval(rotateQuote, quoteTimeInSeconds * 1000);
+        timeout = setInterval(rotateQuote, quoteTimeInSeconds * 1000);
       }
     });
   }
