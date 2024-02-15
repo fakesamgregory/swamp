@@ -174,7 +174,7 @@ if (stats.length) {
  ****************/
 const caseStudies = document.querySelector("[data-case-studies]");
 if (caseStudies) {
-  const mouseCursor = document.getElementById("case-study-mouse");
+  const mouseCursor = document.querySelector("[data-service-blocks-star]");
   const caseStudiesContent = caseStudies.querySelector(
     "[data-case-studies-content]"
   );
