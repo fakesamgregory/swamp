@@ -14,97 +14,85 @@ const filterItems = Array.from(
 
 const filterEvent = new Event("filter");
 
+const showCaseStudy = (caseStudy) => {
+  caseStudy.classList.remove("hide-case-study");
+  caseStudy.removeAttribute("hidden");
+};
+
+const hideCaseStudy = (caseStudy) => {
+  caseStudy.classList.add("hide-case-study");
+  caseStudy.setAttribute("hidden", true);
+};
+
 filters.forEach((filter) => {
   filter.addEventListener("click", (e) => {
     e.preventDefault();
-    const category = decodeURIComponent(e.currentTarget.hash.substr(1));
 
+    if (e.target.classList.contains("filter-active")) {
+      return;
+    }
+
+    const category = e.currentTarget.hash.substr(1);
+
+    // styling for active filter
     filterEl.querySelector(".filter-active").classList.remove("filter-active");
     e.currentTarget.classList.add("filter-active");
 
-     filterItems.forEach((item, index) => {
-      if (index > maxNumberofVisibleElements - 1) {
-        item.classList.add("hide-case-study");
-        item.style.opacity = 0;
-        item.style.visibility = "hidden";
-        item.setAttribute("hidden", true);
+    filterItems.forEach((caseStudy) => {
+      if (
+        category === "reset" ||
+        caseStudy.getAttribute("data-easy-filter-item") ===
+          category.replaceAll("%20", " ")
+      ) {
+        showCaseStudy(caseStudy);
       } else {
-        if (
-          category === "reset" ||
-          item.getAttribute("data-easy-filter-item") === category
-        ) {
-          item.style.display = "block";
-        } else {
-          item.style.display = "none";
-        }
+        hideCaseStudy(caseStudy);
       }
     });
-    });
-  });
 
-    
+    filterEl.dispatchEvent(filterEvent);
+  });
+});
 
 /*
  * view more functionality
  */
-const caseStudies = gsap.utils.toArray("[data-case-study]");
-
-if (caseStudies.length > maxNumberofVisibleElements) {
-  caseStudies.forEach((caseStudy, index) => {
-    if (index > maxNumberofVisibleElements - 1) {
-      caseStudy.style.opacity = 0;
-      caseStudy.style.visibility = "hidden";
-      caseStudy.classList.add("hide-case-study");
-      caseStudy.setAttribute("hidden", true);
+const showVisibleCaseStudies = (selector) => {
+  const visibleCaseStudies = gsap.utils.toArray(selector);
+  gsap.fromTo(
+    visibleCaseStudies,
+    {
+      y: 50,
+      autoAlpha: 0,
+    },
+    {
+      y: 0,
+      autoAlpha: 1,
+      stagger: 0.05,
     }
-  });
+  );
 
-  // show view more link
-  document.querySelector("[data-view-more-link]").style.display = "block";
-}
-
-const caseStudiesTimeline = gsap.timeline({});
-caseStudiesTimeline.fromTo(
-  caseStudies.filter(
-    (caseStudy) => !caseStudy.classList.contains("hide-case-study")
-  ),
-  {
-    y: 50,
-  },
-  {
-    y: 0,
-    autoAlpha: 1,
-    stagger: 0.05,
-  }
-);
-
-filterEl.addEventListener("filter", function (e) {
-  caseStudiesTimeline.restart();
-
-  const visibleElements = Array.from(
-    document.querySelectorAll("[data-easy-filter-item]")
-  ).filter((item) => item.style.display !== "none");
-
-  if (visibleElements.length > maxNumberofVisibleElements - 1) {
-    filterItems.forEach((caseStudy, index) => {
-      console.log(index, index - 1, maxNumberofVisibleElements - 1);
+  if (visibleCaseStudies.length > maxNumberofVisibleElements - 1) {
+    visibleCaseStudies.forEach((caseStudy, index) => {
       if (index > maxNumberofVisibleElements - 1) {
-        caseStudy.classList.add("hide-case-study");
-        caseStudy.style.opacity = 0;
-        caseStudy.style.visibility = "hidden";
-        caseStudy.setAttribute("hidden", true);
-      } else {
-        caseStudy.classList.remove("hide-case-study");
-        caseStudy.style.opacity = 1;
-        caseStudy.style.visibility = "visible";
-        caseStudy.removeAttribute("hidden");
+        hideCaseStudy(caseStudy);
       }
     });
+
+    // show view more link
     document.querySelector("[data-view-more-link]").style.display = "block";
   } else {
     document.querySelector("[data-view-more-link]").style.display = "none";
   }
+};
+
+showVisibleCaseStudies("[data-case-study]");
+
+filterEl.addEventListener("filter", function (e) {
+  showVisibleCaseStudies("[data-case-study]:not(.hide-case-study)");
 });
+
+const caseStudies = gsap.utils.toArray("[data-case-study]");
 
 document
   .querySelector("[data-view-more-link]")
@@ -112,10 +100,7 @@ document
     e.preventDefault();
 
     caseStudies.forEach((caseStudy) => {
-      caseStudy.classList.remove("hide-case-study");
-      caseStudy.style.opacity = 1;
-      caseStudy.style.visibility = "visible";
-      caseStudy.removeAttribute("hidden");
+      showCaseStudy(caseStudy);
     });
 
     e.currentTarget.style.display = "none";

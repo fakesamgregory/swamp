@@ -420,7 +420,7 @@ if (
       quotesSection.style.height = `${quoteMaxHeight}px`;
     });
 
-    setInterval(() => {
+    const rotateQuote = () => {
       const currentActiveSlide = quotes[activeIndex];
       const nextActiveindex =
         activeIndex + 1 === quotes.length ? 0 : activeIndex + 1;
@@ -441,7 +441,17 @@ if (
       });
 
       activeIndex = nextActiveindex;
-    }, quoteTimeInSeconds * 1000);
+    };
+
+    const timeout = setInterval(rotateQuote, quoteTimeInSeconds * 1000);
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        clearInterval(timeout);
+      } else {
+        setInterval(rotateQuote, quoteTimeInSeconds * 1000);
+      }
+    });
   }
 }
 /****************
