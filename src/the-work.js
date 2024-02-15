@@ -22,6 +22,7 @@ filters.forEach((filter) => {
     filterEl.querySelector(".filter-active").classList.remove("filter-active");
     e.currentTarget.classList.add("filter-active");
 
+//New method filters by qty AFTER applying category filter. This code will probably be removed but leaving it just in case I made an error.
     /* filterItems.forEach((item, index) => {
       if (index > maxNumberofVisibleElements - 1) {
         item.classList.add("hide-case-study");
@@ -42,33 +43,26 @@ filters.forEach((filter) => {
 
     const currentlyVisibleItems = [];
 
-    filterItems.forEach((item, index) => {
+    	filterItems.forEach((item, index) => {
+		if (category === "reset" || item.getAttribute("data-easy-filter-item") === category) {
+	        	item.style.display = "block";
+		      	currentlyVisibleItems.push(item)
+		} else {
+	        	item.style.display = "none";
+	      	}
+	});
  
-    if (
-    category === "reset" ||
-    item.getAttribute("data-easy-filter-item") === category
-    ) {
-        item.style.display = "block";
-	      currentlyVisibleItems.push(item)
-      } else {
-        item.style.display = "none";
-      }
-});
- 
-//We now have a full set which may be more than 12, so we check through them and bin off the last ones if we need to
-
-currentlyVisibleItems.forEach((item, index) => {
-
-if (index > maxNumberofVisibleElements - 1) {
-        item.classList.add("hide-case-study");
-        item.style.opacity = 0;
-        item.style.visibility = "hidden";
-        item.setAttribute("hidden", true);
-}
-});
-
-    filterEl.dispatchEvent(filterEvent);
-  });
+	currentlyVisibleItems.forEach((item, index) => {
+		if (index > maxNumberofVisibleElements - 1) {
+		        item.classList.add("hide-case-study");
+		        item.style.opacity = 0;
+		        item.style.visibility = "hidden";
+		        item.setAttribute("hidden", true);
+			item.style.display = "none";
+		}
+	});
+	filterEl.dispatchEvent(filterEvent);
+    });
 });
 
 /*
@@ -76,7 +70,7 @@ if (index > maxNumberofVisibleElements - 1) {
  */
 const caseStudies = gsap.utils.toArray("[data-case-study]");
 
-if (caseStudies.length > 11) {
+if (caseStudies.length > maxNumberofVisibleElements) {
   caseStudies.forEach((caseStudy, index) => {
     if (index > maxNumberofVisibleElements - 1) {
       caseStudy.style.opacity = 0;
