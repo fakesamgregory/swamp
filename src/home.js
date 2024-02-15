@@ -29,12 +29,9 @@ gsap.from(blogItems, {
 /****************
  * Intro text
  * ****************/
-const introText = document.querySelector("[data-intro-text]");
-const introTextSplit = new SplitText(introText, {
-  type: "lines",
-});
+const introText = gsap.utils.toArray("[data-intro-text]");
 
-introTextSplit.lines.forEach((line, index) => {
+introText.forEach((line, index) => {
   gsap.from(line, {
     autoAlpha: 0,
     x: ["-100%", "100%"][index % 2],
@@ -42,7 +39,6 @@ introTextSplit.lines.forEach((line, index) => {
     scrollTrigger: {
       trigger: introText,
       start: "top bottom-=200",
-      end: "bottom top",
     },
   });
 });
