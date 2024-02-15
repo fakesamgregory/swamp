@@ -8,6 +8,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
+/* This code seems to be doubled up (or at least a very similar looking fn) in global.js so I'm experimenting with removing it from home.js */
+/*
 const heroLogoBar = document.querySelector("[data-home-hero-bar]");
 const homeHeroAwards = heroLogoBar.querySelectorAll(".w-dyn-item");
 const heroTimeline = gsap.timeline({});
@@ -18,8 +20,7 @@ heroTimeline.to(
   },
   "<"
 );
-/* This code seems to be doubled up (or at least a very similar looking fn) in global.js so I'm experimenting with removing it from home.js */
-/*heroTimeline.to(
+heroTimeline.to(
   homeHeroAwards,
   {
     autoAlpha: 1,
