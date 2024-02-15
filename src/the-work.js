@@ -22,7 +22,7 @@ filters.forEach((filter) => {
     filterEl.querySelector(".filter-active").classList.remove("filter-active");
     e.currentTarget.classList.add("filter-active");
 
-    filterItems.forEach((item, index) => {
+    /* filterItems.forEach((item, index) => {
       if (index > maxNumberofVisibleElements - 1) {
         item.classList.add("hide-case-study");
         item.style.opacity = 0;
@@ -38,7 +38,34 @@ filters.forEach((filter) => {
           item.style.display = "none";
         }
       }
-    });
+    });*/
+
+    const currentlyVisibleItems = [];
+
+    filterItems.forEach((item, index) => {
+ 
+    if (
+    category === "reset" ||
+    item.getAttribute("data-easy-filter-item") === category
+    ) {
+        item.style.display = "block";
+	      currentlyVisibleItems.push(item)
+      } else {
+        item.style.display = "none";
+      }
+});
+ 
+//We now have a full set which may be more than 12, so we check through them and bin off the last ones if we need to
+
+currentlyVisibleItems.forEach((item, index) => {
+
+if (index > maxNumberofVisibleElements - 1) {
+        item.classList.add("hide-case-study");
+        item.style.opacity = 0;
+        item.style.visibility = "hidden";
+        item.setAttribute("hidden", true);
+}
+});
 
     filterEl.dispatchEvent(filterEvent);
   });
