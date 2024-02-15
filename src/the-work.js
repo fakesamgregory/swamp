@@ -22,8 +22,7 @@ filters.forEach((filter) => {
     filterEl.querySelector(".filter-active").classList.remove("filter-active");
     e.currentTarget.classList.add("filter-active");
 
-//New method filters by qty AFTER applying category filter. This code will probably be removed but leaving it just in case I made an error.
-    /* filterItems.forEach((item, index) => {
+     filterItems.forEach((item, index) => {
       if (index > maxNumberofVisibleElements - 1) {
         item.classList.add("hide-case-study");
         item.style.opacity = 0;
@@ -39,31 +38,9 @@ filters.forEach((filter) => {
           item.style.display = "none";
         }
       }
-    });*/
-
-    const currentlyVisibleItems = [];
-
-    	filterItems.forEach((item, index) => {
-		if (category === "reset" || item.getAttribute("data-easy-filter-item") === category) {
-	        	item.style.display = "block";
-		      	currentlyVisibleItems.push(item)
-		} else {
-	        	item.style.display = "none";
-	      	}
-	});
- 
-	currentlyVisibleItems.forEach((item, index) => {
-		if (index > maxNumberofVisibleElements - 1) {
-		        item.classList.add("hide-case-study");
-		        item.style.opacity = 0;
-		        item.style.visibility = "hidden";
-		        item.setAttribute("hidden", true);
-			item.style.display = "none";
-		}
-	});
-	filterEl.dispatchEvent(filterEvent);
     });
-});
+
+    
 
 /*
  * view more functionality
