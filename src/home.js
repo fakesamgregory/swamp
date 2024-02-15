@@ -18,14 +18,15 @@ heroTimeline.to(
   },
   "<"
 );
-heroTimeline.to(
+/* This code seems to be doubled up (or at least a very similar looking fn) in global.js so I'm experimenting with removing it from home.js */
+/*heroTimeline.to(
   homeHeroAwards,
   {
     autoAlpha: 1,
     stagger: 0.025,
   },
   "<50%"
-);
+);*/
 /*****************
  * END: Hero
  ****************/
