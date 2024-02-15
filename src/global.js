@@ -48,7 +48,7 @@ if (heroHeading) {
  ****************/
 gsap
   .matchMedia()
-  .add(`(min-width: ${globalVariables.breakpoints.mobile.landscape}px)`, () => {
+  .add(`(min-width: ${globalVariables.breakpoints.tablet}px)`, () => {
     const services = gsap.utils.toArray("[data-services-perspective]");
     if (services.length) {
       services.forEach((service) => {
