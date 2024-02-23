@@ -4,7 +4,7 @@
  *********/
 import { gsap } from "gsap";
 
-const maxNumberofVisibleElements = 12;
+const maxNumberofVisibleElements = 64; //Trialling this as a limit we will never hit. Let's just limit within webflow.
 
 const filterEl = document.getElementById("easy-filter");
 const filters = Array.from(filterEl.querySelectorAll("[data-easy-filter]"));
