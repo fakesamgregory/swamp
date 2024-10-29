@@ -26,7 +26,7 @@ gsap.from(
     ease: "power2.out",
     scrollTrigger: {
       trigger: brandPillarsText,
-      start: "top bottom-=600",
+      start: "top bottom-=200",
     },
   },
   "<"
