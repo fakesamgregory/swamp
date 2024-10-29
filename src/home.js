@@ -12,18 +12,21 @@ gsap.registerPlugin(SplitText, ScrollTrigger);
  * Brand Pillars
  * ****************/
 const brandPillarsText = gsap.utils.toArray("[data-brand-pillars-text]");
-
-brandPillarsText.forEach((line, index) => {
-  gsap.from(line, {
-    autoAlpha: 0,
-    x: ["-100%", "100%"][index % 2],
-    ease: "power4.out",
-    scrollTrigger: {
-      trigger: brandPillarsText,
-      start: "top bottom-=200",
-    },
-  });
+const brandPillarsSplitText = new SplitText(brandPillarsText, {
+  type: "words,lines",
+  linesClass: "overflow-hidden",
 });
+gsap.from(
+  brandPillarsSplitText.words,
+  {
+    autoAlpha: 0,
+    y: 50,
+    stagger: 0.1,
+    duration: 1,
+    ease: "power2.out",
+  },
+  "<"
+);
 
 /****************
  * Blogs
