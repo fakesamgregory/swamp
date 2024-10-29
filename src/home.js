@@ -11,7 +11,6 @@ gsap.registerPlugin(SplitText, ScrollTrigger);
 /****************
  * Brand Pillars + Intro Text
  * ****************/
-const brandPillarsAndIntroTimeline = gsap.timeline({});
 const brandPillarsText = gsap.utils.toArray("[data-brand-pillars-text]");
 const brandPillarsSplitText = new SplitText(brandPillarsText, {
   type: "words",
@@ -19,6 +18,12 @@ const brandPillarsSplitText = new SplitText(brandPillarsText, {
 });
 const introText = document.querySelector("[data-intro-text]");
 
+const brandPillarsAndIntroTimeline = gsap.timeline({
+  scrollTrigger: {
+    trigger: brandPillarsText,
+    start: "top bottom-=200",
+  },
+});
 
 brandPillarsAndIntroTimeline.from(
   brandPillarsSplitText.words,
@@ -28,10 +33,6 @@ brandPillarsAndIntroTimeline.from(
     stagger: 0.5,
     duration: 1,
     ease: "power2.out",
-    scrollTrigger: {
-      trigger: brandPillarsText,
-      start: "top bottom-=200",
-    },
   },
   "<"
 );
