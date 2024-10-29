@@ -47,17 +47,17 @@ brandPillarsAndIntroTimeline.from(
 /****************
  * Blogs
  ****************/
-const blogs = document.querySelector("[data-blogs]");
-const blogItems = blogs.querySelectorAll("[data-blog-item]");
-gsap.from(blogItems, {
-  x: 100,
-  autoAlpha: 0,
-  stagger: 0.05,
-  scrollTrigger: {
-    trigger: blogs,
-    start: "top bottom-=200",
-  },
-});
+// const blogs = document.querySelector("[data-blogs]");
+// const blogItems = blogs.querySelectorAll("[data-blog-item]");
+// gsap.from(blogItems, {
+//   x: 100,
+//   autoAlpha: 0,
+//   stagger: 0.05,
+//   scrollTrigger: {
+//     trigger: blogs,
+//     start: "top bottom-=200",
+//   },
+// });
 /****************
  * END: Blogs
  ****************/
