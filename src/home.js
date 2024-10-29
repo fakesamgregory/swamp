@@ -30,7 +30,7 @@ brandPillarsAndIntroTimeline.from(
   {
     autoAlpha: 0,
     y: 50,
-    stagger: 0.5,
+    stagger: 0.25,
     duration: 1,
     ease: "power2.out",
   },
@@ -41,6 +41,7 @@ brandPillarsAndIntroTimeline.from(
   introText,
   {
     autoAlpha: 0,
+    delay: 1.5,
   },
   "<25%"
 );

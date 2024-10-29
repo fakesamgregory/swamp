@@ -29,8 +29,8 @@ heroTimeline.from(
   {
     autoAlpha: 0,
     y: 50,
-    stagger: -0.25,
-    duration: 0.1,
+    stagger: 0.1,
+    duration: 1,
     ease: "power2.out",
   },
   "<"
@@ -40,7 +40,6 @@ heroTimeline.from(
   text,
   {
     autoAlpha: 0,
-    delay: 1,
   },
   "<25%"
 );
