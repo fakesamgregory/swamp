@@ -24,6 +24,10 @@ gsap.from(
     stagger: 0.1,
     duration: 1,
     ease: "power2.out",
+    scrollTrigger: {
+      trigger: brandPillarsText,
+      start: "top bottom-=200",
+    },
   },
   "<"
 );
