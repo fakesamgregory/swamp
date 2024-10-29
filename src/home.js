@@ -13,7 +13,7 @@ gsap.registerPlugin(SplitText, ScrollTrigger);
  * ****************/
 const brandPillarsText = gsap.utils.toArray("[data-brand-pillars-text]");
 const brandPillarsSplitText = new SplitText(brandPillarsText, {
-  type: "words,lines",
+  type: "words",
   linesClass: "overflow-hidden",
 });
 gsap.from(
