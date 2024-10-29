@@ -9,14 +9,18 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
 /****************
- * Brand Pillars
+ * Brand Pillars + Intro Text
  * ****************/
+const brandPillarsAndIntroTimeline = gsap.timeline({});
 const brandPillarsText = gsap.utils.toArray("[data-brand-pillars-text]");
 const brandPillarsSplitText = new SplitText(brandPillarsText, {
   type: "words",
   linesClass: "overflow-hidden",
 });
-gsap.from(
+const introText = document.querySelector("[data-intro-text]");
+
+
+brandPillarsAndIntroTimeline.from(
   brandPillarsSplitText.words,
   {
     autoAlpha: 0,
@@ -30,6 +34,14 @@ gsap.from(
     },
   },
   "<"
+);
+
+brandPillarsAndIntroTimeline.from(
+  introText,
+  {
+    autoAlpha: 0,
+  },
+  "<25%"
 );
 
 /****************
@@ -49,20 +61,3 @@ gsap.from(blogItems, {
 /****************
  * END: Blogs
  ****************/
-
-/****************
- * Intro text
- * ****************/
-const introText = gsap.utils.toArray("[data-intro-text]");
-
-introText.forEach((line, index) => {
-  gsap.from(line, {
-    autoAlpha: 0,
-    x: ["-100%", "100%"][index % 2],
-    ease: "power4.out",
-    scrollTrigger: {
-      trigger: introText,
-      start: "top bottom-=200",
-    },
-  });
-});
