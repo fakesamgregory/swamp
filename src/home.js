@@ -21,7 +21,7 @@ gsap.from(
   {
     autoAlpha: 0,
     y: 50,
-    stagger: 0.1,
+    stagger: 0.5,
     duration: 1,
     ease: "power2.out",
     scrollTrigger: {
