@@ -41,7 +41,8 @@ brandPillarsAndIntroTimeline.from(
   introText,
   {
     autoAlpha: 0,
-    delay: 0.25,
+    delay: 1,
+    duration: 1,
   },
   "<25%"
 );
