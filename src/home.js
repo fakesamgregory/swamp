@@ -51,7 +51,7 @@ brandPillarsAndIntroTimeline.from(
  * Case Studies
  ****************/
 
-onst showVisibleCaseStudies = (selector) => {
+const showVisibleCaseStudies = (selector) => {
   const visibleCaseStudies = gsap.utils.toArray(selector);
   gsap.fromTo(
     visibleCaseStudies,
@@ -66,18 +66,18 @@ onst showVisibleCaseStudies = (selector) => {
     }
   );
 
-  if (visibleCaseStudies.length > maxNumberofVisibleElements - 1) {
-    visibleCaseStudies.forEach((caseStudy, index) => {
-      if (index > maxNumberofVisibleElements - 1) {
-        hideCaseStudy(caseStudy);
-      }
-    });
+  // if (visibleCaseStudies.length > maxNumberofVisibleElements - 1) {
+  //   visibleCaseStudies.forEach((caseStudy, index) => {
+  //     if (index > maxNumberofVisibleElements - 1) {
+  //       hideCaseStudy(caseStudy);
+  //     }
+  //   });
 
-    // show view more link
-    document.querySelector("[data-view-more-link]").style.display = "block";
-  } else {
-    document.querySelector("[data-view-more-link]").style.display = "none";
-  }
+  //   // show view more link
+  //   document.querySelector("[data-view-more-link]").style.display = "block";
+  // } else {
+  //   document.querySelector("[data-view-more-link]").style.display = "none";
+  // }
 };
 
 showVisibleCaseStudies("[data-case-study]");
