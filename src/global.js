@@ -172,7 +172,7 @@ if (stats.length) {
 /****************
  * Case Studies
  ****************/
-console.log('--V-- 2')
+console.log('--V-- 3')
 const caseStudies = document.querySelector("[data-case-studies]:not(.asd)" )
 const mouseCursor = document.querySelector("[data-service-blocks-star]");
 console.log("caseStudies");
@@ -189,7 +189,7 @@ if (caseStudies) {
     console.log(caseStudy);
     const caseStudyPatterns = gsap.utils.toArray("[data-case-study-pattern]");
 
-    caseStudiesContent.addEventListener("mousemove", function (e) {
+    caseStudy.addEventListener("mousemove", function (e) {
       gsap.to(mouseCursor, {
         duration: 0.5,
         x: e.clientX - 75,
@@ -201,7 +201,7 @@ if (caseStudies) {
     });
 
 
-    caseStudiesContent.addEventListener("mouseout", function (e) {
+    caseStudy.addEventListener("mouseout", function (e) {
       gsap.to(mouseCursor, {
         duration: 0.2,
         x: e.clientX - 75,
