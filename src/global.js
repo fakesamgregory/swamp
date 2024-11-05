@@ -172,17 +172,21 @@ if (stats.length) {
 /****************
  * Case Studies
  ****************/
-const caseStudies = gsap.utils.toArray(
-  document.querySelectorAll("[data-case-studies]")
-);
-
+console.log('--V-- 1')
+const caseStudies = document.querySelector("[data-case-studies]:not(.asd)" )
+const mouseCursor = document.querySelector("[data-service-blocks-star]");
+console.log("caseStudies");
+console.log(caseStudies);
 if (caseStudies) {
-  caseStudies.forEach(caseStudiesInstance => {
-    const mouseCursor = document.querySelector("[data-service-blocks-star]");
-    const caseStudiesContent = caseStudiesInstance.querySelector(
+    
+    const caseStudiesContent = caseStudies.querySelector(
       "[data-case-studies-content]"
     );
+    console.log("caseStudiesContent");
+    console.log(caseStudiesContent);
     const caseStudy = gsap.utils.toArray("[data-case-study]");
+    console.log("caseStudy");
+    console.log(caseStudy);
     const caseStudyPatterns = gsap.utils.toArray("[data-case-study-pattern]");
 
     caseStudiesContent.addEventListener("mousemove", function (e) {
@@ -237,7 +241,6 @@ if (caseStudies) {
       },
       "<25%"
     );
-  });
 };
 /****************
  * END: Case Studies
