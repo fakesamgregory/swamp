@@ -172,23 +172,25 @@ if (stats.length) {
 /****************
  * Case Studies
  ****************/
-const caseStudies = document.querySelector("[data-case-studies]");
+const caseStudies = document.querySelectorAll("[data-case-studies]");
 if (caseStudies) {
-  const mouseCursor = document.querySelector("[data-service-blocks-star]");
-  const caseStudiesContent = caseStudies.querySelector(
-    "[data-case-studies-content]"
-  );
-  const caseStudy = gsap.utils.toArray("[data-case-study]");
-  const caseStudyPatterns = gsap.utils.toArray("[data-case-study-pattern]");
+  caseStudies.forEach((caseStudiesInstance) => {
+    const mouseCursor = document.querySelector("[data-service-blocks-star]");
+    const caseStudiesContent = caseStudiesInstance.querySelector(
+      "[data-case-studies-content]"
+    );
+    const caseStudy = gsap.utils.toArray("[data-case-study]");
+    const caseStudyPatterns = gsap.utils.toArray("[data-case-study-pattern]");
 
-  caseStudiesContent.addEventListener("mousemove", function (e) {
-    gsap.to(mouseCursor, {
-      duration: 0.5,
-      x: e.clientX - 75,
-      y: e.clientY - 75,
-      scale: 1,
-      autoAlpha: 1,
-      overwrite: true,
+    caseStudiesContent.addEventListener("mousemove", function (e) {
+      gsap.to(mouseCursor, {
+        duration: 0.5,
+        x: e.clientX - 75,
+        y: e.clientY - 75,
+        scale: 1,
+        autoAlpha: 1,
+        overwrite: true,
+      });
     });
   });
 
