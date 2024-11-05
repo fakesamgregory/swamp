@@ -172,79 +172,67 @@ if (stats.length) {
 /****************
  * Case Studies
  ****************/
-console.log('--V-- 4')
-const caseStudies = document.querySelector("[data-case-studies]" )
-const mouseCursor = document.querySelector("[data-service-blocks-star]");
-console.log("caseStudies");
-console.log(caseStudies);
+const caseStudies = document.querySelector("[data-case-studies]");
 if (caseStudies) {
-    
-    const caseStudiesContent = caseStudies.querySelector(
-      "[data-case-studies-content]"
-    );
-    console.log("caseStudiesContent");
-    console.log(caseStudiesContent);
-    const caseStudy = gsap.utils.toArray("[data-case-study]");
-    console.log("caseStudy");
-    console.log(caseStudy);
-    const caseStudyPatterns = gsap.utils.toArray("[data-case-study-pattern]");
+  const mouseCursor = document.querySelector("[data-service-blocks-star]");
+  const caseStudiesContent = caseStudies.querySelector(
+    "[data-case-studies-content]"
+  );
+  const caseStudy = gsap.utils.toArray("[data-case-study]");
+  const caseStudyPatterns = gsap.utils.toArray("[data-case-study-pattern]");
 
-    caseStudy.forEach((caseStudy) => {
-      caseStudy.addEventListener("mouseover", function (e) {
-        gsap.to(mouseCursor, {
-          duration: 0.5,
-          x: e.clientX - 75,
-          y: e.clientY - 75,
-          scale: 1,
-          autoAlpha: 1,
-          overwrite: true,
-        });
-      }
-      );
-
-
-    caseStudy.addEventListener("mouseout", function (e) {
-      gsap.to(mouseCursor, {
-        duration: 0.2,
-        x: e.clientX - 75,
-        y: e.clientY - 75,
-        scale: 0.2,
-        autoAlpha: 0,
-        delay: 0.3,
-      });
+  caseStudiesContent.addEventListener("mousemove", function (e) {
+    gsap.to(mouseCursor, {
+      duration: 0.5,
+      x: e.clientX - 75,
+      y: e.clientY - 75,
+      scale: 1,
+      autoAlpha: 1,
+      overwrite: true,
     });
   });
 
-    const caseStudyTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: caseStudies,
-        start: "center bottom",
-      },
+  caseStudiesContent.addEventListener("mouseout", function (e) {
+    gsap.to(mouseCursor, {
+      duration: 0.2,
+      x: e.clientX - 75,
+      y: e.clientY - 75,
+      scale: 0.2,
+      autoAlpha: 0,
+      delay: 0.3,
     });
+  });
 
-    caseStudyTimeline.from(caseStudyPatterns[1], {
+  const caseStudyTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: caseStudies,
+      start: "center bottom",
+    },
+  });
+
+  caseStudyTimeline.from(caseStudyPatterns[1], {
+    xPercent: 100,
+  });
+
+  caseStudyTimeline.from(
+    caseStudy,
+    {
       xPercent: 100,
-    });
+      autoAlpha: 0,
+      stagger: 0.07,
+      ease: "power4.out",
+    },
+    "<25%"
+  );
 
-    caseStudyTimeline.from(
-      caseStudy,
-      {
-        xPercent: 100,
-        autoAlpha: 0,
-        stagger: 0.07,
-        ease: "power4.out",
-      },
-      "<25%"
-    );
-
-    caseStudyTimeline.from(
-      caseStudyPatterns[0],
-      {
-        xPercent: -100,
-      },
-      "<25%"
-    );
-};
+  caseStudyTimeline.from(
+    caseStudyPatterns[0],
+    {
+      xPercent: -100,
+    },
+    "<25%"
+  );
+}
 /****************
  * END: Case Studies
  ****************/
