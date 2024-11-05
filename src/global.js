@@ -173,7 +173,7 @@ if (stats.length) {
  * Case Studies
  ****************/
 console.log('--V-- 4')
-const caseStudies = document.querySelector("[data-case-studies])" )
+const caseStudies = document.querySelector("[data-case-studies]" )
 const mouseCursor = document.querySelector("[data-service-blocks-star]");
 console.log("caseStudies");
 console.log(caseStudies);
