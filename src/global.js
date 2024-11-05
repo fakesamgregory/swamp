@@ -172,9 +172,12 @@ if (stats.length) {
 /****************
  * Case Studies
  ****************/
-const caseStudies = document.querySelectorAll("[data-case-studies]");
+const caseStudies = gsap.utils.toArray(
+  document.querySelectorAll("[data-case-studies]")
+);
+
 if (caseStudies) {
-  caseStudies.forEach((caseStudiesInstance) => {
+  caseStudies.forEach(caseStudiesInstance => {
     const mouseCursor = document.querySelector("[data-service-blocks-star]");
     const caseStudiesContent = caseStudiesInstance.querySelector(
       "[data-case-studies-content]"
@@ -192,49 +195,50 @@ if (caseStudies) {
         overwrite: true,
       });
     });
-  });
 
-  caseStudiesContent.addEventListener("mouseout", function (e) {
-    gsap.to(mouseCursor, {
-      duration: 0.2,
-      x: e.clientX - 75,
-      y: e.clientY - 75,
-      scale: 0.2,
-      autoAlpha: 0,
-      delay: 0.3,
+
+    caseStudiesContent.addEventListener("mouseout", function (e) {
+      gsap.to(mouseCursor, {
+        duration: 0.2,
+        x: e.clientX - 75,
+        y: e.clientY - 75,
+        scale: 0.2,
+        autoAlpha: 0,
+        delay: 0.3,
+      });
     });
-  });
 
-  const caseStudyTimeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: caseStudies,
-      start: "center bottom",
-    },
-  });
+    const caseStudyTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: caseStudies,
+        start: "center bottom",
+      },
+    });
 
-  caseStudyTimeline.from(caseStudyPatterns[1], {
-    xPercent: 100,
-  });
-
-  caseStudyTimeline.from(
-    caseStudy,
-    {
+    caseStudyTimeline.from(caseStudyPatterns[1], {
       xPercent: 100,
-      autoAlpha: 0,
-      stagger: 0.07,
-      ease: "power4.out",
-    },
-    "<25%"
-  );
+    });
 
-  caseStudyTimeline.from(
-    caseStudyPatterns[0],
-    {
-      xPercent: -100,
-    },
-    "<25%"
-  );
-}
+    caseStudyTimeline.from(
+      caseStudy,
+      {
+        xPercent: 100,
+        autoAlpha: 0,
+        stagger: 0.07,
+        ease: "power4.out",
+      },
+      "<25%"
+    );
+
+    caseStudyTimeline.from(
+      caseStudyPatterns[0],
+      {
+        xPercent: -100,
+      },
+      "<25%"
+    );
+  });
+};
 /****************
  * END: Case Studies
  ****************/
