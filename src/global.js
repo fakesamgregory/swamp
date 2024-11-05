@@ -173,7 +173,7 @@ if (stats.length) {
  * Case Studies
  ****************/
 console.log('--V-- 4')
-const caseStudies = document.querySelector("[data-case-studies]:not(.asd)" )
+const caseStudies = document.querySelector("[data-case-studies])" )
 const mouseCursor = document.querySelector("[data-service-blocks-star]");
 console.log("caseStudies");
 console.log(caseStudies);
@@ -189,19 +189,21 @@ if (caseStudies) {
     console.log(caseStudy);
     const caseStudyPatterns = gsap.utils.toArray("[data-case-study-pattern]");
 
-    caseStudiesContent.addEventListener("mousemove", function (e) {
-      gsap.to(mouseCursor, {
-        duration: 0.5,
-        x: e.clientX - 75,
-        y: e.clientY - 75,
-        scale: 1,
-        autoAlpha: 1,
-        overwrite: true,
-      });
-    });
+    caseStudy.forEach((caseStudy) => {
+      caseStudy.addEventListener("mouseover", function (e) {
+        gsap.to(mouseCursor, {
+          duration: 0.5,
+          x: e.clientX - 75,
+          y: e.clientY - 75,
+          scale: 1,
+          autoAlpha: 1,
+          overwrite: true,
+        });
+      }
+      );
 
 
-    caseStudiesContent.addEventListener("mouseout", function (e) {
+    caseStudy.addEventListener("mouseout", function (e) {
       gsap.to(mouseCursor, {
         duration: 0.2,
         x: e.clientX - 75,
@@ -211,6 +213,7 @@ if (caseStudies) {
         delay: 0.3,
       });
     });
+  });
 
     const caseStudyTimeline = gsap.timeline({
       scrollTrigger: {
