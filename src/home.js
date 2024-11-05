@@ -51,36 +51,6 @@ brandPillarsAndIntroTimeline.from(
  * Case Studies
  ****************/
 
-const showVisibleCaseStudies = (selector) => {
-  const visibleCaseStudies = gsap.utils.toArray(selector);
-  gsap.fromTo(
-    visibleCaseStudies,
-    {
-      y: 50,
-      autoAlpha: 0,
-    },
-    {
-      y: 0,
-      autoAlpha: 1,
-      stagger: 0.05,
-    }
-  );
-
-  // if (visibleCaseStudies.length > maxNumberofVisibleElements - 1) {
-  //   visibleCaseStudies.forEach((caseStudy, index) => {
-  //     if (index > maxNumberofVisibleElements - 1) {
-  //       hideCaseStudy(caseStudy);
-  //     }
-  //   });
-
-  //   // show view more link
-  //   document.querySelector("[data-view-more-link]").style.display = "block";
-  // } else {
-  //   document.querySelector("[data-view-more-link]").style.display = "none";
-  // }
-};
-
-showVisibleCaseStudies("[data-case-study]");
 
 /****************
  * Blogs
